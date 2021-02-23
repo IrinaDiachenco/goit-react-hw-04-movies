@@ -1,19 +1,52 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import HomePage from '../../views/HomePage/HomePage';
-import MoviesPage from '../../views/MoviesPage/MoviesPage';
-import MovieDetailsPage from '../../views/MovieDetailsPage/MovieDetailsPage';
-import Cast from '../../views/Cast/Cast';
-import Reviews from '../../views/Reviews/Reviews';
+import React, {Suspense, lazy} from 'react';
+import { Route, NavLink, Switch } from 'react-router-dom';
+import PreLoader from '../../components/Loader/Loader'
+import routes from '../../routes/routes';
 
+const HomePage = lazy(() =>
+  import('../../views/HomePage/HomePage'),
+);
+
+const MoviesPage = lazy(() =>
+  import(
+    '../../views/MoviesPage/MoviesPage'),
+);
+
+const MovieDetailsPage = lazy(() =>
+  import(
+    '../../views/MovieDetailsPage/MovieDetailsPage'),
+);
 
 const App = () => (
-    <> 
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/movies" component={MoviesPage} />
-        <Route exact path="/movies/:movieId" component={MovieDetailsPage} />
-        <Route path="/movies/:movieId/cast" component={Cast} />
-        <Route path="/movies/:movieId/reviews" component={Reviews} />
+  <> 
+        <ul>
+      <li>
+        <NavLink
+          exact
+          to="/"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/movies"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Movies
+        </NavLink>
+      </li>
+    </ul>
+  <Suspense fallback={<PreLoader />}>
+     <Switch>
+        <Route exact path={routes.home} component={HomePage} />
+        <Route exact path={routes.movies} component={MoviesPage} />
+        <Route path={routes.moviesDetails} component={MovieDetailsPage} />
+      </Switch>
+  </Suspense>
     </>
 );
 
