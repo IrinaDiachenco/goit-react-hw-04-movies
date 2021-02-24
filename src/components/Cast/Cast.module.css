@@ -1,0 +1,13 @@
+.castContainer {
+  width: 100px;
+  margin: 20px;
+}
+.castList {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+.castItem {
+  align-items: center;
+  text-align: center;
+}

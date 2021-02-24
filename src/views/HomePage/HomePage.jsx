@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTrendingMovies } from '../../Api/Api';
 import MoviesCard from '../../components/MoviesCard/MoviesCard';
+import s from './HomePage.module.css';
 
 export default class HomePage extends Component {
   state = {
@@ -16,7 +17,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <>
-        <h1>Trending today</h1>
+        <h1 className={s.title}>Trending today</h1>
         <ul>
           {this.state.movies.map(({ id, original_title, name }) => {
             return (

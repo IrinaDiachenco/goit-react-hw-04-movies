@@ -3,7 +3,7 @@ import {getMovieDetails} from '../../Api/Api';
 import { Link, Route, Switch } from 'react-router-dom';
 import Cast from '../../components/Cast/Cast';
 import routes from '../../routes/routes';
-
+import s from './MovieDetailsPage.module.css';
 import Review from '../../components/Review/Review';
 
 export default class MovieDetailsPage extends Component {
@@ -51,8 +51,8 @@ export default class MovieDetailsPage extends Component {
     const { match, location } = this.props;
 
     return (
-      <>
-        <button type="button" onClick={this.handleGoBack}>
+      <div className={s.container}>
+        <button type="button" onClick={this.handleGoBack} className={s.button}>
           Go back
         </button>
         <div>
@@ -63,12 +63,12 @@ export default class MovieDetailsPage extends Component {
                   ? `https://image.tmdb.org/t/p/w500/${poster}`
                   : 'https://kritka.info/uploads/posts/no_poster.jpg'
               }
-              alt={title}
+              alt={title}  className={s.poster}
             ></img>
           </div>
           <div>
-            <h1>{title ? title : original_title}</h1>
-            <span>Overview:</span>
+            <h1 className={s.title}>{title ? title : original_title}</h1>
+            <span className={s.descr}>Overview:</span>
             <p>
               {overview
                 ? overview
@@ -76,7 +76,7 @@ export default class MovieDetailsPage extends Component {
             </p>
             {genres && (
               <div>
-                <span>Genres:</span>
+                <span className={s.descr}>Genres:</span>
                 <p>
                   {genres.map(genre => {
                     return `${genre.name}, `;
@@ -88,9 +88,9 @@ export default class MovieDetailsPage extends Component {
         </div>
         <div>
           <div>
-            <div>Additional information</div>
-            <ul>
-              <li>
+            <div className={s.descr}>Additional information:</div>
+            <ul className={s.addInfo}>
+              <li className={s.link}>
                 <Link
                   to={{
                     pathname: `${match.url}/cast`,
@@ -102,7 +102,7 @@ export default class MovieDetailsPage extends Component {
                   Cast
                 </Link>
               </li>
-              <li>
+              <li className={s.link}>
                 <Link
                   to={{
                     pathname: `${match.url}/reviews`,
@@ -133,7 +133,7 @@ export default class MovieDetailsPage extends Component {
             }}
           />
         </Switch>
-      </>
+      </div>
     );
   }
 }

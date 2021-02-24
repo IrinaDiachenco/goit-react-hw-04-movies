@@ -1,0 +1,40 @@
+.container {
+  padding-left: 30px;
+}
+
+.button {
+  padding: 8px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: rgb(204, 202, 202);
+  outline: none;
+}
+
+.button:hover,
+.button:focus {
+  background-color: rgb(196, 165, 165);
+}
+
+.poster {
+  height: 300px;
+}
+
+.title {
+  color: rgb(99, 98, 98);
+}
+
+.descr {
+  font-size: large;
+  font-style: oblique;
+  font-weight: bolder;
+}
+
+.addInfo {
+  list-style: none;
+  display: flex;
+}
+
+.link {
+  margin-right: 40px;
+  font-size: large;
+}

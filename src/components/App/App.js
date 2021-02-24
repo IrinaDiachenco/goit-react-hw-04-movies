@@ -1,7 +1,8 @@
 import React, {Suspense, lazy} from 'react';
 import { Route, NavLink, Switch } from 'react-router-dom';
-import PreLoader from '../../components/Loader/Loader'
+import PreLoader from '../../components/Loader/Loader';
 import routes from '../../routes/routes';
+import s from './App.module.css';
 
 const HomePage = lazy(() =>
   import('../../views/HomePage/HomePage'),
@@ -19,22 +20,22 @@ const MovieDetailsPage = lazy(() =>
 
 const App = () => (
   <> 
-        <ul>
+        <ul className={s.header}>
       <li>
         <NavLink
           exact
-          to="/"
-          className="NavLink"
-          activeClassName="NavLink--active"
+          to={routes.home}
+          className={s.navlink}
+          activeClassName={s.navlinkActive}
         >
           Home
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/movies"
-          className="NavLink"
-          activeClassName="NavLink--active"
+          to={routes.movies}
+          className={s.navlink}
+          activeClassName={s.navlinkActive}
         >
           Movies
         </NavLink>
