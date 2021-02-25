@@ -5,17 +5,17 @@ import routes from '../../routes/routes';
 import s from './App.module.css';
 
 const HomePage = lazy(() =>
-  import('../../views/HomePage/HomePage'),
+  import('../../views/HomePage/HomePage' /*webpackChunkName: "homePageView" */),
 );
 
 const MoviesPage = lazy(() =>
   import(
-    '../../views/MoviesPage/MoviesPage'),
+    '../../views/MoviesPage/MoviesPage' /*webpackChunkName: "moviesPageView" */),
 );
 
 const MovieDetailsPage = lazy(() =>
   import(
-    '../../views/MovieDetailsPage/MovieDetailsPage'),
+    '../../views/MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "MovieDetailsPageView" */),
 );
 
 const App = () => (

@@ -1,15 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import {getMovieDetails} from '../../Api/Api';
 import { Link, Route, Switch } from 'react-router-dom';
-import Cast from '../../components/Cast/Cast';
 import routes from '../../routes/routes';
 import s from './MovieDetailsPage.module.css';
-import Review from '../../components/Review/Review';
+import PreLoader from '../../components/Loader/Loader';
+
+const Cast = lazy(() =>
+  import('../../components/Cast/Cast' /*webpackChunkName: "castView" */),
+);
+
+const Review = lazy(() =>
+  import('../../components/Review/Review' /*webpackChunkName: "reviewView" */),
+);
+
+const imgURL = 'https://image.tmdb.org/t/p/w500';
 
 export default class MovieDetailsPage extends Component {
   state = {
-    vote_average: null,
-    vote_count: null,
     title: null,
     overview: null,
     original_title: null,
@@ -58,11 +65,7 @@ export default class MovieDetailsPage extends Component {
         <div>
           <div>
             <img
-              src={
-                poster
-                  ? `https://image.tmdb.org/t/p/w500/${poster}`
-                  : 'https://kritka.info/uploads/posts/no_poster.jpg'
-              }
+              src={`${imgURL}/${poster}`}
               alt={title}  className={s.poster}
             ></img>
           </div>
@@ -117,7 +120,7 @@ export default class MovieDetailsPage extends Component {
             </ul>
           </div>
         </div>
-
+      <Suspense fallback={<PreLoader/>}>
         <Switch>
           <Route
             path={`${match.url}/cast`}
@@ -132,7 +135,8 @@ export default class MovieDetailsPage extends Component {
               return <Review movieId={match.params.movieId} />;
             }}
           />
-        </Switch>
+          </Switch>
+        </Suspense>
       </div>
     );
   }
